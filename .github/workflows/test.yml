@@ -21,21 +21,20 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Google Chrome and ChromeDriver
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
-
-          # Instalar Google Chrome
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
           
-          # Link simbólico forzado para que ChromeDriver lo encuentre
-          sudo ln -sf /opt/google/chrome/google-chrome /usr/bin/google-chrome
-
-          # Instalar ChromeDriver desde los paquetes del sistema
-          sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
+          # Descargar la versión de ChromeDriver correspondiente
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          DRIVER_VERSION=$(wget -qO- "https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json" | jq -r ".versions[] | select(.version==\"$CHROME_VERSION\") | .downloads.chromedriver[] | select(.platform==\"linux64\") | .url")
+          wget -O chromedriver.zip "$DRIVER_VERSION"
+          unzip chromedriver.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
 
       - name: Set DISPLAY variable
         run: echo "DISPLAY=:99" >> $GITHUB_ENV

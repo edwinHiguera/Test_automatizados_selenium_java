@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
@@ -19,7 +20,11 @@ public class Base {
 
     //metodo conexion navegador
     public WebDriver conexionNavegador(){
-        driver=new ChromeDriver(); //inicializa el chromeDriver para actions
+        ChromeOptions options = new ChromeOptions();
+        // Indica manualmente el binario de Chrome
+        options.setBinary("/opt/google/chrome/google-chrome");
+
+        driver = new ChromeDriver(options); //inicializa el chromeDriver para actions
         return driver; //devuelve el objeto driver
     }
 
