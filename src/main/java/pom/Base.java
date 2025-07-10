@@ -10,7 +10,7 @@ import java.util.List;
 public class Base {
 
     //instancia webDriver
-    private WebDriver driver;
+    protected WebDriver driver;
 
     //constructor
     public Base(WebDriver driver){
@@ -19,8 +19,7 @@ public class Base {
 
     //metodo conexion navegador
     public WebDriver conexionNavegador(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\edwin\\IdeaProjects\\automatizacion\\src\\main\\resources\\drivers\\chromedriver.exe");//ruta
-        driver = new ChromeDriver(); //inicializa el driver
+        driver=new ChromeDriver(); //inicializa el chromeDriver para actions
         return driver; //devuelve el objeto driver
     }
 
