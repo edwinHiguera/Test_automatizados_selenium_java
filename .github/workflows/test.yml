@@ -29,6 +29,9 @@ jobs:
           # Instalar Google Chrome
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          
+          # Link simbólico para que ChromeDriver lo encuentre
+          sudo ln -s /opt/google/chrome/google-chrome /usr/bin/google-chrome
 
           # Instalar ChromeDriver desde los paquetes del sistema
           sudo apt-get install -y chromium-chromedriver
