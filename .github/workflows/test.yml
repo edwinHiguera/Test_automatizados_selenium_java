@@ -21,22 +21,16 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Install Google Chrome and ChromeDriver
+      - name: Install Google Chrome
         run: |
-          set -x
           sudo apt-get update
           sudo apt-get install -y wget unzip
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-          
-          # Descargar la versión de ChromeDriver correspondiente
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          DRIVER_VERSION=$(wget -qO- "https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json" | jq -r ".versions[] | select(.version==\"$CHROME_VERSION\") | .downloads.chromedriver[] | select(.platform==\"linux64\") | .url")
-          wget -O chromedriver.zip "$DRIVER_VERSION"
-          unzip chromedriver.zip
-          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          sudo ln -sf /usr/bin/google-chrome /opt/google/chrome/google-chrome
+
+          # Crear enlace simbólico que Selenium espera
+          sudo mkdir -p /opt/google/chrome
+          sudo ln -s /usr/bin/google-chrome /opt/google/chrome/google-chrome
 
       - name: Set DISPLAY variable
         run: echo "DISPLAY=:99" >> $GITHUB_ENV
