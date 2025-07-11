@@ -30,7 +30,7 @@ jobs:
 
           # Crear enlace simbólico que Selenium espera
           sudo mkdir -p /opt/google/chrome
-          sudo ln -s /usr/bin/google-chrome /opt/google/chrome/google-chrome
+          sudo ln -sf /usr/bin/google-chrome /opt/google/chrome/google-chrome
 
       - name: Set DISPLAY variable
         run: echo "DISPLAY=:99" >> $GITHUB_ENV
