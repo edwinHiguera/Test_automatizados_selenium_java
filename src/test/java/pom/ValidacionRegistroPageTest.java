@@ -35,6 +35,7 @@ public class ValidacionRegistroPageTest {
 
     @After
     public void tearDown() throws Exception {
+        //cierre
         driver.quit();
     }
 
