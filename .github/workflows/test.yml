@@ -23,6 +23,7 @@ jobs:
 
       - name: Install Google Chrome and ChromeDriver
         run: |
+          set -x
           sudo apt-get update
           sudo apt-get install -y wget unzip
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
