@@ -37,3 +37,19 @@ jobs:
 
       - name: Run tests with Maven
         run: mvn test
+
+      - name: Instalar Allure CLI
+        run: |
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install -y allure
+
+      - name: Generar reporte Allure
+        run: |
+          allure generate allure-results --clean -o allure-report
+
+      - name: Subir reporte como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report

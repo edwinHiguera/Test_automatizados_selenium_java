@@ -1,12 +1,13 @@
 package pom;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
+ import static junit.framework.TestCase.assertEquals;
 
 public class ValidacionRegistroPage extends Base {
 
@@ -37,6 +38,7 @@ public class ValidacionRegistroPage extends Base {
 
     //METODOS
 
+    @Step("Validación del formulario de registro de usuarios")
     public void registraUsuario(){
 
         click(registrarGlobal);
@@ -58,6 +60,7 @@ public class ValidacionRegistroPage extends Base {
     }
 
     //valida mensaje exitoso
+    @Step("Validacion de mensaje de usuario registrado correctamente")
     public String usuarioRegistrado(){
         List<WebElement> listaFonts= findElements(mensajeRegistrado);
 
@@ -69,11 +72,12 @@ public class ValidacionRegistroPage extends Base {
     }
 
     //valida el texto resultado registro
+    @Step("Compara si el mensaje de registro exitoso es el correcto")
     public void resultadoRegistro(){
         assertEquals("Note: Your user name is edwin123.", usuarioRegistrado());
     }
 
-
+    @Step("Validación del formulario de ingreso")
     public void ingreso(){
         click(ingresar);
         esperar();
@@ -94,14 +98,6 @@ public class ValidacionRegistroPage extends Base {
             System.out.println("La pagina no es correcta");
         }
 
-    }
-
-    //ejecucion
-    public void ejecucionFlujo(){
-        registraUsuario();
-        usuarioRegistrado();
-        resultadoRegistro();
-        ingreso();
     }
 
 }
