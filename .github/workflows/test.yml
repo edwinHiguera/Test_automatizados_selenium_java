@@ -51,3 +51,17 @@ jobs:
         with:
           name: allure-report
           path: allure-report
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: success()
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git clone --branch=gh-pages https://github.com/${{ github.repository }} gh-pages
+          rm -rf gh-pages/*
+          cp -r allure-report/* gh-pages/
+          cd gh-pages
+          touch .nojekyll
+          git add .
+          git commit -m "Deploy Allure report"
+          git push origin gh-pages
