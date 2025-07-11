@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.List;
 
@@ -20,12 +21,22 @@ public class Base {
 
     //metodo conexion navegador
     public WebDriver conexionNavegador(){
-        ChromeOptions options = new ChromeOptions();
-        // Indica manualmente el binario de Chrome
-        options.setBinary("/opt/google/chrome/google-chrome");
+        WebDriverManager.chromedriver().setup(); // Esto se encarga del driver automáticamente
 
-        driver = new ChromeDriver(options); //inicializa el chromeDriver para actions
-        return driver; //devuelve el objeto driver
+        ChromeOptions options = new ChromeOptions();
+
+        // Detectar si estamos en GitHub Actions
+        boolean esCI = System.getenv("GITHUB_ACTIONS") != null;
+
+        if (esCI) {
+            options.setBinary("/opt/google/chrome/google-chrome"); // Chrome en Actions
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
+
+        driver = new ChromeDriver(options);
+        return driver;
     }
 
 
