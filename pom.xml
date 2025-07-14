@@ -23,13 +23,7 @@
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-junit4</artifactId>
-      <version>2.27.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-junit4-aspect</artifactId>
-      <version>2.27.0</version>
+      <version>2.13.9</version>
     </dependency>
 
     <dependency>
@@ -42,38 +36,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
-      <scope>compile</scope>
     </dependency>
-
-
-    <!-- Soporte para formatos antiguos (.xls) -->
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>5.2.5</version>
-    </dependency>
-
-    <!-- Soporte para formatos modernos (.xlsx, .docx, etc.) -->
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>5.2.5</version>
-    </dependency>
-
-    <!-- Requerido para trabajar con XML (formato OOXML) -->
-    <dependency>
-      <groupId>org.apache.xmlbeans</groupId>
-      <artifactId>xmlbeans</artifactId>
-      <version>5.1.1</version>
-    </dependency>
-
-    <!-- Requerido para compresión de archivos (como .xlsx que son ZIP) -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-compress</artifactId>
-      <version>1.21</version>
-    </dependency>
-
 
   </dependencies>
 
@@ -104,12 +67,14 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
+          <includes>
+            <include>**/TestRunner.class</include>
+          </includes>
           <systemPropertyVariables>
             <allure.results.directory>allure-results</allure.results.directory>
           </systemPropertyVariables>
         </configuration>
       </plugin>
-
 
       <plugin>
         <groupId>io.qameta.allure</groupId>
