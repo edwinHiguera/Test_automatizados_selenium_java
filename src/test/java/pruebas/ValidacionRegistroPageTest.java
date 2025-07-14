@@ -1,11 +1,17 @@
 package pom;
 
+
+import io.qameta.allure.junit4.AllureJunit4;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
  import io.qameta.allure.*;
 
+ 
+
+@RunWith(AllureJunit4.class)
  @Epic("Validacion y registro de usuario en la web de pruebas")
  @Owner("Edwin Higuera")
 public class ValidacionRegistroPageTest {
