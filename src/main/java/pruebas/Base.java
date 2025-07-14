@@ -1,4 +1,4 @@
-package pom;
+package pruebas;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
